@@ -33,18 +33,31 @@ const JobCard = ({
     loading: loadingSavedJob,
     data: savedJob,
     fn: fnSavedJob,
-  } = useFetch(saveJob,{
-    alreadySaved: saved,
-  });
+  } = useFetch(saveJob,{alreadySaved: saved,
+    user_id: user.id,
+    job_id: job.id,});
 
   const handleSaveJob = async () => {
-    await fnSavedJob({
-      user_id: user.id,
-      job_id: job.id,
-    });
-    onJobAction();
-  };
+  if (!user?.id || !job?.id) {
+    console.error("User or Job ID is undefined");
+    return;
+  }
 
+  console.log("Saving/Unsaving job with:", {
+    alreadySaved: saved,
+    user_id: user.id,
+    job_id: job.id,
+  });
+
+  await fnSavedJob({
+    alreadySaved: saved,
+    user_id: user.id,
+    job_id: job.id,
+  });
+
+  setSaved(!saved); // toggle UI
+  onJobAction(); // refresh list
+};
   // const handleDeleteJob = async () => {
   //   await fnDeleteJob();
   //   onJobAction();

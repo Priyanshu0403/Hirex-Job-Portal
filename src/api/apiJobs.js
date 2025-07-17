@@ -52,38 +52,44 @@ export async function getSingleJob(token, { job_id }) {
 }
 
 // - Add / Remove Saved Job
-export async function saveJob(token, { alreadySaved, job_id, user_id }, saveData) {
+export async function saveJob(token, params) {
   const supabase = await supabaseClient(token);
-  
+
+  const { alreadySaved, user_id, job_id } = params;
+
+  if (!user_id || !job_id) {
+    console.error("Missing user_id or job_id:", { user_id, job_id });
+    return [];
+  }
+
   if (alreadySaved) {
-    // If the job is already saved, remove it
-    const { data, error: deleteError } = await supabase
-    .from("saved_jobs")
-    .delete()
-    .eq("job_id", job_id)
-    .eq("user_id", user_id);
-    
-    if (deleteError) {
-      console.error("Error removing saved job:", deleteError);
-      return data;
+    const { data, error } = await supabase
+      .from("saved_jobs")
+      .delete()
+      .eq("user_id", user_id)
+      .eq("job_id", job_id);
+
+    if (error) {
+      console.error("Error removing saved job:", error);
+      return [];
     }
-    
+
     return data;
   } else {
-    // If the job is not saved, add it to saved jobs
-    const { data, error: insertError } = await supabase
-    .from("saved_jobs")
-    .insert([saveData])
-    .select();
-    
-    if (insertError) {
-      console.error("Error saving job:", insertError);
-      return data;
+    const { data, error } = await supabase
+      .from("saved_jobs")
+      .insert([{ user_id, job_id }])
+      .select();
+
+    if (error) {
+      console.error("Error saving job:", error);
+      return [];
     }
-    
+
     return data;
   }
 }
+
 
 // - job isOpen toggle - (recruiter_id = auth.uid())
 export async function updateHiringStatus(token, { job_id }, isOpen) {
