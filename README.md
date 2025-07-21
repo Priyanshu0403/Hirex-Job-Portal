@@ -27,15 +27,4 @@ A modern full-stack **Job Portal** built with React.js, Tailwind CSS, Supabase, 
 - 🔎 Filter/Search Jobs by Location, Type, etc.
 - 🧑‍💼 Recruiter Dashboard 
 
----
-
-## 🖥️ Screenshots
-
-> Add images here like:
-> - Home Page
-> - Job Detail Page
-> - Save Button in Action
-> - Auth Pages (Login/Register)
-
----
 
