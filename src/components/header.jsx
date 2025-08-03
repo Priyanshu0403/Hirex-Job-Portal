@@ -10,7 +10,7 @@ import {
   useUser,
 } from "@clerk/clerk-react";
 import { Button } from "./ui/button";
-import { BriefcaseBusiness, Heart, PenBox } from "lucide-react";
+import { BriefcaseBusiness, Heart, PenBox, Search } from "lucide-react";
 const Header = () => {
   const [showSignIn, setShowSignIn] = useState(false);
 
@@ -55,11 +55,7 @@ const Header = () => {
         >
           <div className="flex items-center">
             <Link to="/">
-              <img
-                src="/logo.png"
-                className="h-14 object-contain w-auto rounded-lg opacity-90 backdrop-blur-sm bg-blue-950 p-1"
-                alt="Hirrd Logo"
-              />
+              <img src="/logo.png" className="h-16" alt="Hirrd Logo" />
             </Link>
           </div>
 
@@ -72,15 +68,7 @@ const Header = () => {
                 Home
               </button>
             </Link>
-            <Link to={"/jobs"}>
-              <button
-                className="hover:text-white hover:scale-105 transition duration-200"
-              >
-                Find Jobs
-              </button>
-            </Link>
-            
-            
+
             <button
               onClick={() => scrollToId("AboutUs")}
               className="hover:text-white hover:scale-105 transition duration-200"
@@ -101,7 +89,16 @@ const Header = () => {
             </button>
           </div>
 
-          <div className="flex gap-8">
+          <div className="flex gap-3 items-center ">
+            <div className="font-medium text-sm text-neutral-300">
+            
+              <Link to="/jobs">
+                  <Button variant="white" className="rounded-full h-8">
+                    <Search size={20} className="mr-2" />
+                    Find Jobs
+                  </Button>
+                </Link>
+            </div>
             <SignedOut>
               <Button variant="outline" onClick={() => setShowSignIn(true)}>
                 Login
@@ -110,7 +107,7 @@ const Header = () => {
             <SignedIn>
               {user?.unsafeMetadata?.role === "recruiter" && (
                 <Link to="/post-job">
-                  <Button variant="white" className="rounded-full">
+                  <Button variant="white" className="rounded-full h-8">
                     <PenBox size={20} className="mr-2" />
                     Post a Job
                   </Button>
