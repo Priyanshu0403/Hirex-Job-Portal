@@ -73,7 +73,7 @@ const JobListing = () => {
   }
 
   return (
-    <div className="sm:py-20">
+    <div className="sm:py-10">
       <h1 className="gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">
         Latest Jobs
       </h1>

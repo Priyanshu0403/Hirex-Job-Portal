@@ -38,10 +38,10 @@ const Header = () => {
   };
 
   return (
-    <div className="py-5">
+    <div className="py-11">
       <div className="w-full flex justify-center fixed top-0 z-50">
         <nav
-          className="fixed top-2 left-1/2 -translate-x-1/2 z-50 
+          className="fixed top-5 left-1/2 -translate-x-1/2 z-50 
                    w-[92%] max-w-8xl h-20 px-6 flex items-center justify-between 
                    rounded-xl shadow-lg border border-white/10 
                    bg-blue/30 backdrop-blur-md transition-all duration-300"
@@ -75,9 +75,10 @@ const Header = () => {
             >
               About Us
             </button>
-            <button
+            <button 
               onClick={() => scrollToId("faqs")}
               className="hover:text-white hover:scale-105 transition duration-200"
+              
             >
               FAQs
             </button>

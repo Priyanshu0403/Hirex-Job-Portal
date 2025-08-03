@@ -21,7 +21,7 @@ const LandingPage = () => {
   const { user } = useUser();
 
   return (
-    <main id="Home" className="flex flex-col gap-10 sm:gap-20 py-10 sm:py-24">
+    <main id="Home" className="flex flex-col gap-10 sm:gap-20 sm:py-40">
       <section className="text-center ">
         <h3 className="text-2xl">Hi, {user?.firstName || "Guest"}! 👋</h3>
         <h1  className="flex flex-col items-center justify-center gradient-title font-extrabold text-4xl sm:text-3xl lg:text-7xl tracking-tighter py-3">
@@ -152,7 +152,7 @@ const LandingPage = () => {
                   href="mailto:support@hirex.com"
                   className="underline hover:text-blue-900 transition"
                 >
-                  support@hirex.com
+                  priyanshusarvaiyya@gmail.com
                 </a>
               </div>
               <div>
