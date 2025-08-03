@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Frontend Developer - React.js",
+    "description": "Join our growing frontend team to build scalable UI components and dashboards using React and Tailwind CSS.",
+    "location": "Maharashtra",
+    "company_id": "1",
+    "requirements": "### Requirements\\n- Strong knowledge of React.js and Hooks\\n- Familiarity with Tailwind CSS and responsive design\\n- Experience with REST APIs and Git\\n- Bonus: Knowledge of Supabase, Clerk, or Shadcn UI\\n\\n### Perks\\n- Remote-friendly\\n- Learning budget\\n- Health insurance"
+  },
+  {
+    "title": "Backend Developer - Node.js",
+    "description": "We’re looking for a Node.js developer to create APIs and manage our scalable backend infrastructure.",
+    "location": "Karnataka",
+    "company_id": "2",
+    "requirements": "### Requirements\\n- Proficient in Node.js and Express\\n- Experience with PostgreSQL or MongoDB\\n- Familiarity with authentication & RESTful services\\n- Bonus: Familiarity with Supabase functions\\n\\n### Benefits\\n- Work-from-home\\n- 5-day work week\\n- Competitive salary"
+  },
+  {
+    "title": "Full Stack Developer (MERN)",
+    "description": "Looking for a passionate Full Stack Developer with expertise in the MERN stack to work on high-impact features.",
+    "location": "Delhi",
+    "company_id": "3",
+    "requirements": "### Skills\\n- MongoDB, Express.js, React.js, Node.js\\n- Tailwind or Bootstrap for styling\\n- Version control using Git/GitHub\\n- API integration & testing using Postman\\n\\n### Extras\\n- Opportunity to work on live projects\\n- Access to premium Udemy courses"
+  },
+  {
+    "title": "UI/UX Designer",
+    "description": "We’re hiring a creative UI/UX Designer to help shape modern user experiences and design intuitive interfaces.",
+    "location": "Tamil Nadu",
+    "company_id": "1",
+    "requirements": "### Responsibilities\\n- Create wireframes, mockups, and prototypes\\n- Design consistent UI using Figma or Adobe XD\\n- Work closely with devs to bring designs to life\\n- User research & accessibility best practices\\n\\n### Tools\\n- Figma, Illustrator, Photoshop\\n- Notion, Zeplin"
+  },
+  {
+    "title": "DevOps Engineer",
+    "description": "Hiring a DevOps Engineer to automate deployments and maintain CI/CD pipelines for scalable apps.",
+    "location": "West Bengal",
+    "company_id": "2",
+    "requirements": "### Requirements\\n- Experience with AWS/GCP, Docker, and Kubernetes\\n- Knowledge of CI/CD tools like GitHub Actions, Jenkins\\n- Familiarity with Infra-as-Code (Terraform, Pulumi)\\n- Monitor and log system performance\\n\\n### Benefits\\n- Remote + stock options\\n- Paid certifications"
+  },
+  {
+    "title": "Mobile App Developer - Flutter",
+    "description": "We’re building cross-platform apps and need a Flutter expert to join our fast-paced dev team.",
+    "location": "Gujarat",
+    "company_id": "3",
+    "requirements": "### Skills Needed\\n- Flutter & Dart for Android/iOS\\n- Integration with Firebase or Supabase\\n- Experience with BLoC or Provider\\n- REST APIs & state management\\n\\n### Perks\\n- Flexible working hours\\n- Access to Mac devices for testing\\n- Paid time off"
+  }
+]

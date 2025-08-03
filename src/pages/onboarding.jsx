@@ -35,7 +35,7 @@ const Onboarding = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center mt-40">
+    <div className="flex flex-col items-center justify-center mt-40 ">
       <h2 className="gradient-title font-extrabold text-7xl sm:text-8xl tracking-tighter">
         I am a...
       </h2>

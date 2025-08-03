@@ -1,0 +1,72 @@
+[
+  {
+    "experience": 2,
+    "skills": "React, JavaScript, Tailwind CSS",
+    "education": "Graduate",
+    "resume": "resume1.pdf",
+    "candidate_id": "u001",
+    "job_id": "j101",
+    "name": "Ankit Sharma",
+    "status": "applied"
+  },
+  {
+    "experience": 4,
+    "skills": "Node.js, Express, PostgreSQL",
+    "education": "Post Graduate",
+    "resume": "resume2.docx",
+    "candidate_id": "u002",
+    "job_id": "j102",
+    "name": "Riya Mehta",
+    "status": "applied"
+  },
+  {
+    "experience": 1,
+    "skills": "HTML, CSS, JavaScript",
+    "education": "Intermediate",
+    "resume": "resume3.pdf",
+    "candidate_id": "u003",
+    "job_id": "j103",
+    "name": "Sahil Verma",
+    "status": "applied"
+  },
+  {
+    "experience": 3,
+    "skills": "MongoDB, Mongoose, Express.js, Git",
+    "education": "Graduate",
+    "resume": "resume4.doc",
+    "candidate_id": "u004",
+    "job_id": "j104",
+    "name": "Priya Rajput",
+    "status": "applied"
+  },
+  {
+    "experience": 5,
+    "skills": "Flutter, Dart, Firebase",
+    "education": "Post Graduate",
+    "resume": "resume5.pdf",
+    "candidate_id": "u005",
+    "job_id": "j105",
+    "name": "Yash Patel",
+    "status": "applied"
+  },
+  {
+    "experience": 0,
+    "skills": "Figma, UI/UX, Wireframing",
+    "education": "Graduate",
+    "resume": "resume6.pdf",
+    "candidate_id": "u006",
+    "job_id": "j106",
+    "name": "Neha Desai",
+    "status": "applied"
+  },
+  {
+    "experience": 2,
+    "skills": "AWS, DevOps, CI/CD",
+    "education": "Post Graduate",
+    "resume": "resume7.docx",
+    "candidate_id": "u007",
+    "job_id": "j107",
+    "name": "Kunal Joshi",
+    "status": "applied"
+  }
+]
