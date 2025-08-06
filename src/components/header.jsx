@@ -66,9 +66,8 @@ const Header = () => {
             </Link>
           </div>
 
-
           {/* Nav links - desktop only */}
-          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-6 text-sm text-neutral-300 font-medium">
+          <div className="hidden md:flex flex-1 justify-center gap-6 text-sm text-neutral-300 font-medium">
             <Link to="/">
               <button
                 onClick={() => scrollToId("Home")}
@@ -95,19 +94,25 @@ const Header = () => {
             >
               Contact Us
             </button>
+          </div>
 
+          
           {/* Right buttons */}
+          {/* Right section */}
+          <div className="hidden md:flex items-center gap-4 mr-2">
             <Link to="/jobs">
               <Button variant="white" className="rounded-full h-8">
                 <Search size={20} className="mr-2" />
                 Find Jobs
               </Button>
             </Link>
+
             <SignedOut>
               <Button variant="outline" onClick={() => setShowSignIn(true)}>
                 Login
               </Button>
             </SignedOut>
+
             <SignedIn>
               {user?.unsafeMetadata?.role === "recruiter" && (
                 <Link to="/post-job">
@@ -119,8 +124,7 @@ const Header = () => {
               )}
             </SignedIn>
           </div>
-          
-          
+
           {/* Always visible on all screens */}
           <div className="flex items-center gap-4">
             <SignedIn>
@@ -131,7 +135,7 @@ const Header = () => {
                   },
                 }}
               >
-              <UserButton.MenuItems>
+                <UserButton.MenuItems>
                   <UserButton.Link
                     label="My Jobs"
                     labelIcon={<BriefcaseBusiness size={15} />}
@@ -145,8 +149,8 @@ const Header = () => {
                   <UserButton.Action label="manageAccount" />
                 </UserButton.MenuItems>
               </UserButton>
-               </SignedIn>
-               {/* Mobile Hamburger */}
+            </SignedIn>
+            {/* Mobile Hamburger */}
             <div className="md:hidden">
               <button onClick={() => setShowMobileMenu(!showMobileMenu)}>
                 {showMobileMenu ? <X size={28} /> : <Menu size={28} />}
@@ -175,7 +179,9 @@ const Header = () => {
               <button onClick={() => scrollToId("Home")}>Home</button>
               <button onClick={() => scrollToId("AboutUs")}>About Us</button>
               <button onClick={() => scrollToId("faqs")}>FAQs</button>
-              <button onClick={() => scrollToId("ContactUs")}>Contact Us</button>
+              <button onClick={() => scrollToId("ContactUs")}>
+                Contact Us
+              </button>
               <Link to="/jobs">
                 <Button variant="white" className="w-full mt-2">
                   <Search size={20} className="mr-2" />
@@ -198,7 +204,6 @@ const Header = () => {
                     </Button>
                   </Link>
                 )}
-                
               </SignedIn>
             </div>
           </div>
