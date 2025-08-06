@@ -1,6 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import {
   SignedIn,
@@ -10,10 +8,18 @@ import {
   useUser,
 } from "@clerk/clerk-react";
 import { Button } from "./ui/button";
-import { BriefcaseBusiness, Heart, PenBox, Search } from "lucide-react";
+import {
+  BriefcaseBusiness,
+  Heart,
+  PenBox,
+  Search,
+  Menu,
+  X,
+} from "lucide-react";
+
 const Header = () => {
   const [showSignIn, setShowSignIn] = useState(false);
-
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [search, setSearch] = useSearchParams();
   const { user } = useUser();
 
@@ -34,6 +40,7 @@ const Header = () => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
+      setShowMobileMenu(false); // Close menu on mobile
     }
   };
 
@@ -47,19 +54,21 @@ const Header = () => {
                    bg-blue/30 backdrop-blur-md transition-all duration-300"
           style={{
             borderBottom: "1px solid rgba(255,255,255,0.05)",
-            // 15, 95, 183, 1
             background: "rgba( 20,60,120,0.5)",
             backdropFilter: "blur(14px)",
             WebkitBackdropFilter: "blur(14px)",
           }}
         >
+          {/* Logo */}
           <div className="flex items-center">
             <Link to="/">
               <img src="/logo.png" className="h-16" alt="Hirrd Logo" />
             </Link>
           </div>
 
-          <div className="absolute left-1/2 transform -translate-x-1/2 flex gap-6 text-sm text-neutral-300 font-medium">
+
+          {/* Nav links - desktop only */}
+          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-6 text-sm text-neutral-300 font-medium">
             <Link to="/">
               <button
                 onClick={() => scrollToId("Home")}
@@ -68,17 +77,15 @@ const Header = () => {
                 Home
               </button>
             </Link>
-
             <button
               onClick={() => scrollToId("AboutUs")}
               className="hover:text-white hover:scale-105 transition duration-200"
             >
               About Us
             </button>
-            <button 
+            <button
               onClick={() => scrollToId("faqs")}
               className="hover:text-white hover:scale-105 transition duration-200"
-              
             >
               FAQs
             </button>
@@ -88,18 +95,14 @@ const Header = () => {
             >
               Contact Us
             </button>
-          </div>
 
-          <div className="flex gap-3 items-center ">
-            <div className="font-medium text-sm text-neutral-300">
-            
-              <Link to="/jobs">
-                  <Button variant="white" className="rounded-full h-8">
-                    <Search size={20} className="mr-2" />
-                    Find Jobs
-                  </Button>
-                </Link>
-            </div>
+          {/* Right buttons */}
+            <Link to="/jobs">
+              <Button variant="white" className="rounded-full h-8">
+                <Search size={20} className="mr-2" />
+                Find Jobs
+              </Button>
+            </Link>
             <SignedOut>
               <Button variant="outline" onClick={() => setShowSignIn(true)}>
                 Login
@@ -114,6 +117,13 @@ const Header = () => {
                   </Button>
                 </Link>
               )}
+            </SignedIn>
+          </div>
+          
+          
+          {/* Always visible on all screens */}
+          <div className="flex items-center gap-4">
+            <SignedIn>
               <UserButton
                 appearance={{
                   elements: {
@@ -121,7 +131,7 @@ const Header = () => {
                   },
                 }}
               >
-                <UserButton.MenuItems>
+              <UserButton.MenuItems>
                   <UserButton.Link
                     label="My Jobs"
                     labelIcon={<BriefcaseBusiness size={15} />}
@@ -135,10 +145,17 @@ const Header = () => {
                   <UserButton.Action label="manageAccount" />
                 </UserButton.MenuItems>
               </UserButton>
-            </SignedIn>
+               </SignedIn>
+               {/* Mobile Hamburger */}
+            <div className="md:hidden">
+              <button onClick={() => setShowMobileMenu(!showMobileMenu)}>
+                {showMobileMenu ? <X size={28} /> : <Menu size={28} />}
+              </button>
+            </div>
           </div>
         </nav>
 
+        {/* Sign In Modal */}
         {showSignIn && (
           <div
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
@@ -148,6 +165,42 @@ const Header = () => {
               signUpForceRedirectUrl="/onboarding"
               fallbackRedirectUrl="/onboarding"
             />
+          </div>
+        )}
+
+        {/* Mobile Menu Dropdown */}
+        {showMobileMenu && (
+          <div className="md:hidden fixed top-20 left-0 right-0 z-40 bg-[#143C78] text-white shadow-lg p-4 rounded-lg mx-4">
+            <div className="flex flex-col gap-4 text-sm font-medium pt-5">
+              <button onClick={() => scrollToId("Home")}>Home</button>
+              <button onClick={() => scrollToId("AboutUs")}>About Us</button>
+              <button onClick={() => scrollToId("faqs")}>FAQs</button>
+              <button onClick={() => scrollToId("ContactUs")}>Contact Us</button>
+              <Link to="/jobs">
+                <Button variant="white" className="w-full mt-2">
+                  <Search size={20} className="mr-2" />
+                  Find Jobs
+                </Button>
+              </Link>
+
+              <SignedOut>
+                <Button variant="outline" onClick={() => setShowSignIn(true)}>
+                  Login
+                </Button>
+              </SignedOut>
+
+              <SignedIn>
+                {user?.unsafeMetadata?.role === "recruiter" && (
+                  <Link to="/post-job">
+                    <Button variant="white" className="w-full mt-2">
+                      <PenBox size={20} className="mr-2" />
+                      Post a Job
+                    </Button>
+                  </Link>
+                )}
+                
+              </SignedIn>
+            </div>
           </div>
         )}
       </div>

@@ -21,10 +21,10 @@ const LandingPage = () => {
   const { user } = useUser();
 
   return (
-    <main id="Home" className="flex flex-col gap-10 sm:gap-20 sm:py-40">
+    <main id="Home" className="flex flex-col gap-10 sm:gap-20 sm:py-40 py-10">
       <section className="text-center ">
         <h3 className="text-2xl">Hi, {user?.firstName || "Guest"}! 👋</h3>
-        <h1  className="flex flex-col items-center justify-center gradient-title font-extrabold text-4xl sm:text-3xl lg:text-7xl tracking-tighter py-3">
+        <h1  className="flex flex-col items-center justify-center gradient-title font-extrabold text-2xl sm:text-3xl lg:text-7xl tracking-tighter py-3">
           Find Your Dream Job
           <span className="flex items-center gap-2 sm:gap-6">
             and get
