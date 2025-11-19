@@ -18,6 +18,7 @@ import {
 
 import { getCompanies } from "@/api/apiCompanies";
 import { getJobs } from "@/api/apiJobs";
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 const JobListing = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -32,6 +33,9 @@ const JobListing = () => {
     fn: fnCompanies,
   } = useFetch(getCompanies);
 
+  //this useFetch hook is custom hook created to fetch data
+  //it return fn,data,error,loading states
+  //this are destructured here and renamed as per requirement
   const {
     loading: loadingJobs,
     data: jobs,
@@ -52,10 +56,15 @@ const JobListing = () => {
   useEffect(() => {
     if (isLoaded) fnJobs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    //the session hook in the fetch hook(to call fnJobs) only gets called when the data is loaded from the useUser 
   }, [isLoaded, location, company_id, searchQuery]);
 
   const handleSearch = (e) => {
     e.preventDefault();
+    //new FormData(e.target)
+    //creates a FormData object with all the input values inside the form.
+    //FormData- built-in browser API that lets you easily read all the values from a form — 
+    // without manually writing document.getElementById() or handling each input one by one
     let formData = new FormData(e.target);
 
     const query = formData.get("search-query");
@@ -159,6 +168,31 @@ const JobListing = () => {
           )}
         </div>
       )}
+
+      <Pagination>
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious href="#" />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#">1</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#" isActive>
+            2
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#">3</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationEllipsis />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationNext href="#" />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
     </div>
   );
 };

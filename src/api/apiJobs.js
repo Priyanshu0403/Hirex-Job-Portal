@@ -1,12 +1,18 @@
 import supabaseClient from "@/utils/supabase";
 
+// They expect the token to be given to them
+//  They do not fetch the token themselves
+//  Your UI (React components) provides the token
 // Fetch Jobs
 export async function getJobs(token, { location, company_id, searchQuery }) {
   const supabase = await supabaseClient(token);
   let query = supabase
     .from("jobs")
     .select("*, saved: saved_jobs(id), company: companies(name,logo_url)");
+    //in the above select statement we are also fetching saved jobs and the company details along with the job details from the 
+    //companies table using foreign key relationship
 
+  /******Filters*********/
   if (location) {
     query = query.eq("location", location);
   }
@@ -14,7 +20,11 @@ export async function getJobs(token, { location, company_id, searchQuery }) {
   if (company_id) {
     query = query.eq("company_id", company_id);
   }
+  
 
+
+  //if the title of the job contains the search query then this is the condition for that
+  //ilike is for case insensitive search(contains)
   if (searchQuery) {
     query = query.ilike("title", `%${searchQuery}%`);
   }

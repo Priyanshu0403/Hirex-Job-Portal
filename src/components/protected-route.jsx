@@ -3,6 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 
 const ProtectedRoute = ({ children }) => {
+  //useUser is a hook from Clerk to get user authentication status
   const { isSignedIn, isLoaded, user } = useUser();
   const { pathname } = useLocation();
 
