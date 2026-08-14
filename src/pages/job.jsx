@@ -109,7 +109,15 @@ const JobPage = () => {
         source={job?.requirements}
         className="bg-transparent sm:text-lg" // add global ul styles - tutorial
       />
-      {job?.recruiter_id !== user?.id && (
+
+      {/* Rendering applications */}
+      {job?.isDemo && (
+        <p className="rounded border border-amber-500/50 bg-amber-500/10 p-3 text-amber-100">
+          This is a sample job shown while the live job service is unavailable. Applying is disabled.
+        </p>
+      )}
+
+      {job?.recruiter_id !== user?.id && !job?.isDemo && (
         <ApplyJobDrawer
           job={job}
           user={user}

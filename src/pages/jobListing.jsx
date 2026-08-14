@@ -18,9 +18,12 @@ import {
 
 import { getCompanies } from "@/api/apiCompanies";
 import { getJobs } from "@/api/apiJobs";
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 const JobListing = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+const jobsPerPage = 6;
+
   const [searchQuery, setSearchQuery] = useState("");
   const [location, setLocation] = useState("");
   const [company_id, setCompany_id] = useState("");
@@ -44,7 +47,22 @@ const JobListing = () => {
     location,
     company_id,
     searchQuery,
+    page: currentPage,
+  limit: jobsPerPage,
   });
+
+  //PAGINATION LOGIC
+  const nextPage = () => {
+  setCurrentPage(prev => prev + 1);
+};
+
+const prevPage = () => {
+  if (currentPage > 1) setCurrentPage(prev => prev - 1);
+};
+
+const hasMore = jobs?.length === jobsPerPage;
+
+
 
   useEffect(() => {
     if (isLoaded) {
@@ -57,7 +75,7 @@ const JobListing = () => {
     if (isLoaded) fnJobs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     //the session hook in the fetch hook(to call fnJobs) only gets called when the data is loaded from the useUser 
-  }, [isLoaded, location, company_id, searchQuery]);
+  }, [isLoaded, location, company_id, searchQuery,currentPage]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -170,29 +188,25 @@ const JobListing = () => {
       )}
 
       <Pagination>
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious href="#" />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#" isActive>
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href="#" />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious onClick={prevPage} className="cursor-pointer" />
+    </PaginationItem>
+
+    <PaginationItem>
+      <PaginationLink isActive>{currentPage}</PaginationLink>
+    </PaginationItem>
+
+    <PaginationItem>
+      <PaginationNext
+  onClick={hasMore ? nextPage : null}
+  className={!hasMore ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+/>
+
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
+
     </div>
   );
 };

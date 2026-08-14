@@ -1,47 +1,60 @@
 import supabaseClient from "@/utils/supabase";
+import { getDefaultJob, getDefaultJobs } from "@/data/defaultJobs";
 
 // They expect the token to be given to them
 //  They do not fetch the token themselves
 //  Your UI (React components) provides the token
 // Fetch Jobs
-export async function getJobs(token, { location, company_id, searchQuery }) {
-  const supabase = await supabaseClient(token);
-  let query = supabase
-    .from("jobs")
-    .select("*, saved: saved_jobs(id), company: companies(name,logo_url)");
+export async function getJobs(token, { location, company_id, searchQuery, page, limit  }) {
+  try {
+    const supabase = await supabaseClient(token);
+    let query = supabase
+      .from("jobs")
+      .select("*, saved: saved_jobs(id), company: companies(name,logo_url)");
     //in the above select statement we are also fetching saved jobs and the company details along with the job details from the 
     //companies table using foreign key relationship
 
-  /******Filters*********/
-  if (location) {
-    query = query.eq("location", location);
+    /******Filters*********/
+    if (location) {
+      query = query.eq("location", location);
+    }
+
+    if (company_id) {
+      query = query.eq("company_id", company_id);
+    }
+      // ADD PAGINATION HERE
+    const start = (page - 1) * limit;
+    const end = start + limit - 1;
+
+    query = query.range(start, end);
+
+
+    //if the title of the job contains the search query then this is the condition for that
+    //ilike is for case insensitive search(contains)
+    if (searchQuery) {
+      query = query.ilike("title", `%${searchQuery}%`);
+    }
+
+    const { data, error } = await query;
+
+    if (!error && data?.length) {
+      return data;
+    }
+
+    if (error) console.error("Error fetching Jobs:", error);
+  } catch (error) {
+    console.error("Unable to fetch jobs from Supabase:", error);
   }
 
-  if (company_id) {
-    query = query.eq("company_id", company_id);
-  }
-  
-
-
-  //if the title of the job contains the search query then this is the condition for that
-  //ilike is for case insensitive search(contains)
-  if (searchQuery) {
-    query = query.ilike("title", `%${searchQuery}%`);
-  }
-
-  const { data, error } = await query;
-
-  if (error) {
-    console.error("Error fetching Jobs:", error);
-    return null;
-  }
-
-  return data;
+  return getDefaultJobs({ location, company_id, searchQuery, page, limit });
 }
 
 
 // Read single job
 export async function getSingleJob(token, { job_id }) {
+  const defaultJob = getDefaultJob(job_id);
+  if (defaultJob) return defaultJob;
+
   const supabase = await supabaseClient(token);
   let query = supabase
   .from("jobs")
@@ -50,7 +63,6 @@ export async function getSingleJob(token, { job_id }) {
   )
   .eq("id", job_id)
   .single();
-  
   const { data, error } = await query;
   
   if (error) {

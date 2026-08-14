@@ -1,16 +1,19 @@
 import supabaseClient, { supabaseUrl } from "@/utils/supabase";
+import { defaultCompanies } from "@/data/defaultJobs";
 
 // Fetch Companies
 export async function getCompanies(token) {
-  const supabase = await supabaseClient(token);
-  const { data, error } = await supabase.from("companies").select("*");
+  try {
+    const supabase = await supabaseClient(token);
+    const { data, error } = await supabase.from("companies").select("*");
 
-  if (error) {
-    console.error("Error fetching Companies:", error);
-    return null;
+    if (!error && data?.length) return data;
+    if (error) console.error("Error fetching Companies:", error);
+  } catch (error) {
+    console.error("Unable to fetch companies from Supabase:", error);
   }
 
-  return data;
+  return defaultCompanies;
 }
 
 export async function addNewCompany(token, _ ,companyData) {

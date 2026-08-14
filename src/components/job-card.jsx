@@ -97,6 +97,11 @@ const JobCard = ({
         </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4 flex-1">
+        {job.isDemo && (
+          <span className="w-fit rounded bg-amber-500/20 px-2 py-1 text-xs text-amber-200">
+            Sample job
+          </span>
+        )}
         <div className="flex justify-between">
           {job.company && <img src={job.company.logo_url} className="h-6" />}
           <div className="flex gap-2 items-center">
@@ -112,7 +117,7 @@ const JobCard = ({
             More Details
           </Button>
         </Link>
-        {!isMyJob && (
+        {!isMyJob && !job.isDemo && (
           <Button
             variant="outline"
             className="w-15"

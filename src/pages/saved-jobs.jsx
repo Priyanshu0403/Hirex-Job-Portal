@@ -33,6 +33,10 @@ const SavedJobs=()=> {
             savedJobs?.map((saved)=>{
               return (
                 <JobCard 
+
+                //this .job came from the api call where you asked for jobs data to be also iincluded
+                //with the saved jobs table 
+                //job:jobs(*,company:companies(*)) something like this
                 key={saved.job}
                 job={saved?.job}
                 onJobAction={fnSavedJobs}
