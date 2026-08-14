@@ -32,5 +32,6 @@ A modern full-stack **Job Portal** built with React.js, Tailwind CSS, Supabase, 
   <img src="./project_screenshots/1.png" width="48%">
   <img src="./project_screenshots/2.png" width="48%">
   <img src="./project_screenshots/3.png" width="48%">
+  <img src="./project_screenshots/4.png" width="48%">
 </p>
 
